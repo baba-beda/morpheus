@@ -11,7 +11,8 @@ RUN touch /etc/apache2/sites-available/opencpu2.conf
 RUN printf "ProxyPass /ocpu/ http://localhost:8001/ocpu/\nProxyPassReverse /ocpu/ http://localhost:8001/ocpu\n" >> /etc/apache2/sites-available/opencpu2.conf
 RUN a2ensite opencpu2
 RUN printf "\nServerName localhost\n" >> /etc/apache2/apache2.conf
-RUN printf "*\t soft \t nofile \t 8192\n*\t hard \t nofile \t 8192\n" >> /etc/security/limits.conf 
+RUN printf "*\t soft \t nofile \t 8192\n*\t hard \t nofile \t 8192\n" >> /etc/security/limits.conf
+RUN ulimit -n 8192
 RUN apache2ctl configtest
 RUN apache2ctl graceful
 RUN service apache2 reload
