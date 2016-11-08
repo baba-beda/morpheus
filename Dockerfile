@@ -11,6 +11,7 @@ RUN touch /etc/apache2/sites-available/opencpu2.conf
 RUN a2ensite opencpu2
 RUN echo -e "ProxyPass /ocpu/ http://localhost:8001/ocpu/\nProxyPassReverse /ocpu/ http://localhost:8001/ocpu\n" >> /etc/apache2/sites-available/opencpu2.conf
 RUN sudo service apache2 reload
+RUN service apache2 restart
 RUN apache2ctl configtest
 RUN service apache2 status
 RUN cd /var/www/html && \
