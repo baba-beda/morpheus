@@ -8,9 +8,10 @@ RUN R -e 'source("https://bioconductor.org/biocLite.R"); biocLite("Biobase"); li
 RUN a2dissite opencpu
 RUN R -e 'opencpu::opencpu$start(8001)'
 RUN touch /etc/apache2/sites-available/opencpu2.conf
-RUN a2ensite opencpu2
 RUN echo -e "ProxyPass /ocpu/ http://localhost:8001/ocpu/\nProxyPassReverse /ocpu/ http://localhost:8001/ocpu\n" >> /etc/apache2/sites-available/opencpu2.conf
+RUN a2ensite opencpu2
 RUN sudo service apache2 reload
+RUN cat /var/log/apache2/access.log
 RUN service apache2 restart
 RUN apache2ctl configtest
 RUN service apache2 status
