@@ -6,7 +6,11 @@ RUN apt-get install -y software-properties-common
 RUN apt-get -y install git
 RUN apt-get -y install libcairo2-dev
 RUN apt-get -y install libxt-dev
+RUN sh -c 'echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list'
+RUN gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
+RUN gpg -a --export E084DAB9 | sudo apt-key add -
 RUN apt-get update
+RUN apt-get -y install r-base
 RUN R -e 'source("https://bioconductor.org/biocLite.R"); biocLite("Biobase"); library(devtools); install_github("baba-beda/morpheusR"); install_github("hadley/scales")'
 RUN touch /etc/apache2/sites-available/opencpu2.conf
 RUN printf "ProxyPass /ocpu/ http://localhost:8001/ocpu/\nProxyPassReverse /ocpu/ http://localhost:8001/ocpu\n" >> /etc/apache2/sites-available/opencpu2.conf
