@@ -26,8 +26,14 @@ RUN cd /var/www/html && \
     git clone https://github.com/baba-beda/morpheus.js.git morpheus && \
     cd
     
+RUN add-apt-repository -y ppa:opencpu/opencpu-1.6 && \
+  apt-get update && \
+  apt-get install -y opencpu-lib
+
+RUN a2enmod proxy_http
+
 EXPOSE 80
 EXPOSE 443
 EXPOSE 8004
 
-CMD service apache2 enable && service apache2 start && service apache2 reload && R -e 'opencpu::opencpu$start(8001)' && tail -F /var/log/opencpu/apache_access.log
+CMD service apache2 start && R -e 'opencpu::opencpu$start(8001)' && tail -F /var/log/opencpu/apache_access.log
