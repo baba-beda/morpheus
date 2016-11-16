@@ -30,4 +30,4 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 8004
 
-CMD R -e 'opencpu::opencpu$start(8001)' && tail -F /var/log/opencpu/apache_access.log
+CMD service apache2 reload && R -e 'opencpu::opencpu$start(8001)' && tail -F /var/log/opencpu/apache_access.log
