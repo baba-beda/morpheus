@@ -12,3 +12,5 @@ RUN a2ensite opencpu2
 RUN cd /var/www/html && \
     git clone https://github.com/baba-beda/morpheus.js.git morpheus && \
     cd
+
+CMD R -e 'opencpu::opencpu$start(8001)' && tail -F /var/log/opencpu/apache_access.log
