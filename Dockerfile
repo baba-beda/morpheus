@@ -7,6 +7,7 @@ RUN apt-get -y install git
 RUN apt-get -y install libcairo2-dev
 RUN apt-get -y install libxt-dev
 RUN apt-get -y install libssl-dev
+RUN apt-get -y install libssh2-1-dev
 RUN sh -c 'echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list'
 RUN gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
 RUN gpg -a --export E084DAB9 | sudo apt-key add -
