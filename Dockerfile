@@ -22,7 +22,7 @@ RUN apt-get update
 RUN apt-get -y install r-base 
 RUN apt-get -y install libprotobuf-dev protobuf-compiler
 
-RUN R -e 'source("https://bioconductor.org/biocLite.R"); biocLite("Biobase"); install.packages("devtools", repo = "http://cran.gis-lab.info"); library(devtools); install_github("hadley/scales"); install_github("baba-beda/morpheusR", ref="release")'
+RUN R -e 'source("https://bioconductor.org/biocLite.R"); biocLite("Biobase"); biocLite("GEOquery"); install.packages("devtools", repo = "http://cran.gis-lab.info"); library(devtools); install_github("hadley/scales"); install_github("baba-beda/morpheusR", ref="release")'
 RUN cd /var/www/html && \
     git clone -b release https://github.com/baba-beda/morpheus.js.git morpheus && \
     cd
