@@ -21,7 +21,7 @@ RUN gpg -a --export E084DAB9 | sudo apt-key add -
 RUN apt-get update
 RUN apt-get -y install r-base 
 RUN apt-get -y install libprotobuf-dev protobuf-compiler
-
+RUN apt-get -y install r-cran-xml
 RUN R -e 'source("https://bioconductor.org/biocLite.R"); install.packages("XML", repo = "http://cran.gis-lab.info"); biocLite("Biobase"); biocLite("GEOquery")'
 RUN R -e 'install.packages("devtools", repo = "http://cran.gis-lab.info"); library(devtools); install_github("hadley/scales"); install_github("baba-beda/morpheusR", ref="release")'
 RUN cd /var/www/html && \
