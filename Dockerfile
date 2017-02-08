@@ -4,7 +4,9 @@ RUN locale-gen en_US en_US.UTF-8 && \
     update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 && \
     locale-gen
     
-RUN apt-get -y update && apt-get -y dist-upgrade && apt-get -y install \
+RUN apt-get -y update && \
+    apt-get -y dist-upgrade && \
+    apt-get -y install \
         software-properties-common \
         git \
         libcairo2-dev \
@@ -12,7 +14,12 @@ RUN apt-get -y update && apt-get -y dist-upgrade && apt-get -y install \
         libssl-dev \
         libssh2-1-dev \
         libcurl4-openssl-dev \
-        apache2
+        apache2 && \
+    apt-add-repository -y ppa:opencpu/opencpu-1.6 && \
+    apt-get update && \
+    apt-get install -y \
+        opencpu-lib
+
 
 RUN touch /etc/apache2/sites-available/opencpu2.conf
 RUN printf "ProxyPass /ocpu/ http://localhost:8001/ocpu/\nProxyPassReverse /ocpu/ http://localhost:8001/ocpu\n" >> /etc/apache2/sites-available/opencpu2.conf
@@ -32,9 +39,6 @@ RUN cd /var/www/html && \
     git clone -b release https://github.com/baba-beda/morpheus.js.git morpheus && \
     cd
     
-RUN add-apt-repository -y ppa:opencpu/opencpu-1.6 && \
-  apt-get update && \
-  apt-get install -y opencpu-lib
 
 RUN a2enmod proxy_http
 
