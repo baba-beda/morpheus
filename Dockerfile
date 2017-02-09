@@ -1,8 +1,4 @@
-FROM ubuntu:14.04
-
-RUN locale-gen en_US en_US.UTF-8 && \
-    update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 && \
-    locale-gen
+FROM ubuntu
     
 RUN apt-get -y update && \
     apt-get -y dist-upgrade && \
@@ -46,4 +42,9 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 8004
 
-CMD service apache2 start && R -e 'opencpu::opencpu$start(8001)' && tail -F /var/log/opencpu/apache_access.log
+CMD service apache2 start && \
+    locale-gen en_US en_US.UTF-8 && \
+    update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 && \
+    locale-gen && \
+    R -e 'opencpu::opencpu$start(8001)' && \
+    tail -F /var/log/opencpu/apache_access.log
