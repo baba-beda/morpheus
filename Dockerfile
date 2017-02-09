@@ -42,9 +42,11 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 8004
 
+RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8     
+
 CMD service apache2 start && \
-    locale-gen en_US en_US.UTF-8 && \
-    update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 && \
-    locale-gen && \
     R -e 'opencpu::opencpu$start(8001)' && \
     tail -F /var/log/opencpu/apache_access.log
