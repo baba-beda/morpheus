@@ -47,6 +47,9 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en  
 ENV LC_ALL en_US.UTF-8     
 
+RUN mkdir -p /var/morpheus/cache
+VOLUME ["/var/morpheus/cache"]
+
 CMD service apache2 start && \
     R -e 'opencpu::opencpu$start(8001)' && \
     tail -F /var/log/opencpu/apache_access.log
