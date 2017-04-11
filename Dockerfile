@@ -30,9 +30,9 @@ RUN apt-get -y update && apt-get -y install \
     protobuf-compiler \
     r-cran-xml
 RUN R -e 'source("https://bioconductor.org/biocLite.R"); install.packages("XML", repo = "http://cran.gis-lab.info"); biocLite("Biobase"); biocLite("limma"); biocLite("org.Mm.eg.db")'
-RUN R -e 'install.packages("devtools", repo = "http://cran.gis-lab.info"); library(devtools); install_github("hadley/scales"); install_github("baba-beda/morpheusR", ref="release"); install_github("assaron/GEOquery")'
+RUN R -e 'install.packages("devtools", repo = "http://cran.gis-lab.info"); library(devtools); install_github("hadley/scales"); install_github("baba-beda/morpheusR"); install_github("assaron/GEOquery")'
 RUN cd /var/www/html && \
-    git clone -b release https://github.com/baba-beda/morpheus.js.git morpheus && \
+    git clone https://github.com/baba-beda/morpheus.js.git morpheus && \
     cd
     
 
