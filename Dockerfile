@@ -10,7 +10,8 @@ RUN apt-get -y update && \
         libssl-dev \
         libssh2-1-dev \
         libcurl4-openssl-dev \
-        apache2 && \
+        apache2 \
+        locales && \
     apt-add-repository -y ppa:opencpu/opencpu-1.6 && \
     apt-get update && \
     apt-get install -y \
